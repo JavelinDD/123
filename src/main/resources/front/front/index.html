@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>首页</title>
+		<link rel="stylesheet" href="./layui/css/layui.css">
+		<link rel="stylesheet" href="./xznstatic/css/common.css"/>
+		<link rel="stylesheet" href="./xznstatic/css/style.css"/>
+		
+		<style type="text/css">
+			/* 全局样式 */
+			html, body {height: 100%;}
+			#iframe {width: 100%; margin-top: 0; padding-top: 70px;}
+			#header {height: auto; background: #fff; border-bottom: 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 999;}
+			#tabbar {position: relative; z-index: 999;}
+			
+			/* 顶部导航栏上层（nav-top） */
+			#header .nav-top {
+				display: flex;
+				align-items: center;
+				padding: 0 20px;
+				font-size: 16px;
+				color: #2a8a15;
+				box-sizing: border-box;
+				height: 40px;
+				background-color: rgba(46, 78, 126, 1);
+				box-shadow: 0 10px 8px #fff143;
+				justify-content: space-between;
+			}
+			#header .nav-top-img {
+				width: 124px;
+				height: 40px;
+				border-radius: 6px;
+				border: 1px solid rgba(0,0,0,.3);
+				box-shadow: 0 0 6px rgba(0,0,0,.3);
+			}
+			#header .nav-top-title,
+			#header .nav-top-tel {
+				line-height: 40px;
+				padding: 0 10px;
+				border-radius: 6px;
+				border: 1px solid rgba(0,0,0,.3);
+			}
+			#header .nav-top-title {
+				font-size: 30px;
+				color: rgba(255, 251, 240, 1);
+			}
+			#header .nav-top-tel {
+				font-size: 18px;
+				color: rgba(240, 252, 255, 1);
+				box-shadow: none;
+			}
+			
+			/* 顶部导航栏下层（navs） */
+			#header .navs {
+				display: flex;
+				padding: 0 20px;
+				align-items: center;
+				box-sizing: border-box;
+				height: 70px;
+				background-color: rgba(0, 85, 119, 1);
+				box-shadow: 0 0px 0px rgba(0,0,0,0);
+				justify-content: flex-start;
+			}
+			#header .navs .title {
+				line-height: 40px;
+				font-size: 30px;
+				color: #fff;
+				padding: 10px;
+				margin: 50px;
+				border-radius: 6px;
+				border: 1px solid rgba(0,0,0,.3);
+				box-shadow: 0 0 6px rgba(0,0,0,0);
+			}
+			#header .navs ul {display: flex; list-style: none; margin: 0; padding: 0;}
+			#header .navs li {
+				display: inline-block;
+				line-height: 66px;
+				padding: 0 10px;
+				margin: 10px;
+				color: #fff;
+				font-size: 22px;
+				border-radius: 4px;
+				border: 1px solid rgba(6, 82, 121, 1);
+				background-color: rgba(0, 85, 119, 1);
+				box-shadow: 1px 0 3px rgba(0, 85, 119, 1);
+				text-align: center;
+			}
+			#header .navs li a {color: inherit; text-decoration: none;}
+			#header .navs li.current,
+			#header .navs li:hover {
+				color: #fff;
+				border-radius: 0;
+				border-color: #fff;
+				background-color: rgba(0, 85, 119, 1);
+				box-shadow: 0 3px 0 #ffffff;
+			}
+			#header .navs li.current a,
+			#header .navs li:hover a {color: inherit;}
+			
+			/* 底部栏（tabbar） */
+			#tabbar {
+				padding: 30px 0;
+				box-shadow: 0 0 6px;
+				margin: 30px 0 0 0;
+				border-color: rgba(255, 255, 255, 0.3);
+				background-color: rgba(6, 82, 121, 1);
+				border-radius: 0;
+				border-width: 0;
+				border-style: solid;
+			}
+			#tabbar .company,
+			#tabbar .record,
+			#tabbar .desc {
+				padding: 0 10px;
+				margin: 10px auto;
+				color: #fff;
+				text-align: center;
+				line-height: 32px;
+				font-size: 14px;
+			}
+			#tabbar .company {background-color: rgba(6, 82, 121, 1);}
+			#tabbar .record {background-color: #000;}
+			#tabbar .desc {
+				background-color: rgba(6, 82, 121, 1);
+				border: 1px solid rgba(6, 82, 121, 1);
+				width: 40%;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 顶部导航栏 -->
+		<div id="header">
+			<div v-if='true' class="nav-top">
+			  <img v-if='false' class="nav-top-img" src='https://www.baidu.com/img/flexible/logo/pc/result@2.png'>
+			  <div v-if="false" class="nav-top-title">{{projectName}}</div>
+			  <div class="nav-top-tel"></div>
+			</div>
+		    <div class="navs">
+				<div class="title" v-if="true" v-text="projectName"></div>
+				<div class="list">
+					<ul>
+						<li class='current'><a href="javascript:navPage('./pages/home/home.html')" class="menumain"><i v-if="false" class="layui-icon layui-icon-home"></i>首页</a></li>
+						<li v-for="(item,index) in indexNav" v-bind:key="index"><a :href="'javascript:navPage(\''+item.url+'\')'" class="menumain" style="cursor: pointer;"><i v-if="false" class="layui-icon" :class="iconArr[index]"></i>{{item.name}}</a></li>
+						<li><a href="javascript:centerPage();" class="menumain"><i v-if="false" class="layui-icon layui-icon-username"></i>个人中心</a></li>
+						<li><a :href="adminurl" target="_blank" class="menumain" style="cursor: pointer;"><i v-if="false" class="layui-icon layui-icon-link"></i>后台管理</a></li>
+						
+						<!-- 新增AI对话选项（需配合JS逻辑） -->
+						<li v-if="aiChatFlag">
+							<a href="javascript:aiChatPage();" class="menumain" style="cursor: pointer;">
+								<i v-if="false" class="layui-icon">&#xe63d;</i> AI对话
+							</a>
+						</li>
+						
+						<li v-if="cartFlag"><a href="javascript:navPage('./pages/shop-cart/list.html')" class="menumain"><i v-if="false" class="layui-icon">&#xe657;</i>购物车</a></li>
+						<li v-if="chatFlag"><a href="javascript:chatTap()" class="menumain"><i v-if="false" class="layui-icon">&#xe677;</i>客服</a></li>
+					</ul>
+				</div>
+		    </div>
+		</div>
+
+		<iframe src="./pages/home/home.html" id="iframe" frameborder="0" scrolling="no" width="100%" onload="changeFrameHeight"></iframe>
+
+    <div id="tabbar" v-if="true" class="tabbar">
+      <img v-if='false' :style='{"boxShadow":"0 0 6px rgba(255,0,0,.8)","margin":"0 auto","borderColor":"rgba(0,0,0,.3)","borderRadius":"100%","borderWidth":"1px","width":"44px","borderStyle":"solid","height":"44px"}' style='display: block;' src='http://codegen.caihongy.cn/20201024/ed5e326ca66f403aa3197b5fbb4ec733.jpg' />
+      <div class="company">京ICP备1041289号 </div>
+      <div class="record"></div>
+      <div class="desc"></div>
+    </div>
+
+		<script src="./xznstatic/js/jquery-1.11.3.min.js"></script>
+		<script src="./layui/layui.js"></script>
+		<script src="./js/vue.js"></script>
+		<script src="./js/config.js"></script>
+
+		<script>
+      var vue1 = new Vue({el: '#tabbar'})
+
+			var vue = new Vue({
+				el: '#header',
+				data: {
+					iconArr: ['layui-icon-gift','layui-icon-email','layui-icon-logout','layui-icon-transfer','layui-icon-slider','layui-icon-print','layui-icon-cols','layui-icon-snowflake','layui-icon-note','layui-icon-flag','layui-icon-theme','layui-icon-website','layui-icon-console','layui-icon-face-surprised','layui-icon-template-1','layui-icon-app','layui-icon-read','layui-icon-component','layui-icon-file-b','layui-icon-unlink','layui-icon-tabs','layui-icon-form','layui-icon-chat'],
+					indexNav: indexNav,
+					cartFlag: cartFlag,
+					adminurl: adminurl,
+					chatFlag: chatFlag,
+					projectName: projectName,
+					
+					// 新增：AI对话显示开关
+					aiChatFlag: true
+				},
+				mounted: function() {
+					this.bindClickOnLi();
+				},
+				created() {
+					this.iconArr.sort(()=>{
+					  return (0.5-Math.random())
+					})
+				},
+				methods: {
+					jump(url) {
+						jump(url)
+					},
+					bindClickOnLi() {
+						let list = document.getElementsByTagName("li");
+						for(var i = 0;i<list.length;i++){
+							list[i].onclick = function(){
+								$(this).addClass("current").siblings().removeClass("current");
+							}
+						}
+					}
+				}
+			});
+
+			// 新增：AI对话跳转函数
+			function aiChatPage() {
+				localStorage.setItem('iframeUrl', './pages/ai-chat/ai-chat.html');
+				document.getElementById('iframe').src = './pages/ai-chat/ai-chat.html';
+			}
+
+			layui.use(['element','layer'], function() {
+				var element = layui.element;
+				var layer = layui.layer;
+			});
+
+			function chatTap(){
+				var userTable = localStorage.getItem('userTable');
+				if (userTable) {
+					layui.layer.open({
+						type: 2,
+						title: '客服',
+						area: ['600px', '600px'],
+						content: './pages/chat/chat.html'
+					});
+				} else {
+					window.location.href = './pages/login/login.html'
+				}
+			}
+
+			function navPage(url) {
+				localStorage.setItem('iframeUrl', url);
+				document.getElementById('iframe').src = url;
+			}
+
+			function centerPage() {
+				var userTable = localStorage.getItem('userTable');
+				if (userTable) {
+					localStorage.setItem('iframeUrl', './pages/' + userTable + '/center.html');
+					document.getElementById('iframe').src = './pages/' + userTable + '/center.html';
+				} else {
+					window.location.href = './pages/login/login.html'
+				}
+			}
+
+			var iframeUrl = localStorage.getItem('iframeUrl');
+			document.getElementById('iframe').src = iframeUrl  || './pages/home/home.html';
+
+      setInterval(function(){
+        changeFrameHeight();
+      },200)
+
+      function changeFrameHeight() {
+        var iframe = document.getElementById('iframe');
+          if (iframe) {
+              var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+              if (iframeWin.document.body) {
+                  iframe.height = iframeWin.document.body.scrollHeight;
+              }
+          }
+      };
+
+			window.onresize = function() {
+				changeFrameHeight();
+			}
+			//1
+		</script>
+	</body>
+</html>
